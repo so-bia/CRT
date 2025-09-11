@@ -1,0 +1,54 @@
+Problem Statement
+
+You are provided with string str and your task is to shorten the string to the minimum length possible.
+The minimum length of the string can be attained by performing a set of operations that states that you 
+could select two same characters and delete them but without disturbing the order in the string which means 
+that only the adjacent same letters can be deleted. For example, "baaab" can be reduced to "bab" in just one iteration. 
+Your task is to shorten the length of the string str and print the reduced string and if all the characters are deleted then print "Empty String".
+
+Input Format:
+The input consists of a single line:
+The line contains string str
+The input will be read from the STDIN by the candidate
+
+Output Format:
+Print the modified string. If the modified string contains no character, then print" Empty String".
+The output will be matched to the candidate's output printed on the STDOUT
+
+Sample Input:
+abba
+Sample Output:
+Empty String
+
+************SOLUTION***********
+
+import java.util.*;
+public class Main
+{
+static String StackExamplexp(String s){
+     Stack <Character> s1= new Stack<>();
+       char [] c=s.toCharArray();
+       s1.push(c[0]);
+	    for(int i=1;i<=s.length()-1;i++){
+	        if(c[i]!=s1.peek()){
+	            s1.push(c[i]);
+	        }
+	        else{
+	            if(!s1.isEmpty())
+	            s1.pop();
+	        }
+	    }
+	        if(s1.isEmpty()) return "empty stack";
+	        else return s1.toString();
+    
+}
+
+	public static void main(String[] args) {
+	    Scanner sc= new Scanner(System.in);
+	    System.out.println("enter a string:");
+	    String s= sc.nextLine();
+	    System.out.println(StackExamplexp(s));
+	   
+	        
+	    }
+	}
