@@ -1,4 +1,4 @@
-#  CRT - Campus Recruitment Training 🎓
+#  CRT - Campus Recruitment Training 🎓 
 
 Welcome to **CRT (Campus Recruitment Training)**, where placements meet personality!  
 Whether you’re aiming for Google or the local grocery store’s tech team, this is your quirky, fun-packed toolkit for campus recruitment.  
