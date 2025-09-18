@@ -16,3 +16,33 @@ class Solution {
         return prices;
     }
 }
+
+/* MONOTONIC STACK APPROACH
+
+
+- next samller element to right 
+- next samller element to left
+- next larger element to right 
+- next larger element to left 
+
+
+class Solution {
+  public int[] finalPrices(int[] prices) {
+
+    int[] ans = prices.clone();
+    Deque <Integer> stack = new ArrayDeque<>();
+
+    for (int j = 0; j < prices.length; ++j) {
+      
+      while (!stack.isEmpty() && prices[j] <= prices[stack.peek()])
+        ans[stack.pop()] -= prices[j];
+      stack.push(j);
+    }
+
+    return ans;
+  }
+}
+
+
+*/
+
