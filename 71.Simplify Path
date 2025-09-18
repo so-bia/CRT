@@ -1,0 +1,4 @@
+- stack creation
+- break it when there is  " / " -> store in String []
+- write logic for constraints 
+- String Builder 
