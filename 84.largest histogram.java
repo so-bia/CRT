@@ -1,47 +1,69 @@
-class solution {
-     public int largestRectangleArea(int[] heights) {
-        int maxArea = 0;
-       int n = heights.length;
-      
-        // Stack to maintain indices of heights in increasing order
+import java.util.ArrayDeque;
+import java.util.Deque;
+
+class Solution {
+    public int largestRectangleArea(int[] heights) {
+        int n = heights.length;
+        if (n == 0) {
+            return 0;
+        }
+
+        // Deque to be used as a stack for storing indices
         Deque<Integer> stack = new ArrayDeque<>();
-      
-        // Arrays to store the nearest smaller element indices
-       // left[i]: index of the nearest smaller element to the left of i (-1 if none)
+
+        // left[i]: index of the nearest smaller element to the left of i (-1 if none)
         int[] left = new int[n];
         // right[i]: index of the nearest smaller element to the right of i (n if none)
         int[] right = new int[n];
-        Arrays.fill(right, n);
-      
-        // Single pass to find both left and right boundaries7        for (int i = 0; i < n; i++) {
-            // Pop elements from stack that are greater than or equal to current height
-            // For these popped elements, current index i is their right boundary
+
+        
+//pass 1 -> left 
+
+        for (int i = 0; i < n; i++) {
+            // Pop elements from stack while stack is not empty and the top is >= current element
             while (!stack.isEmpty() && heights[stack.peek()] >= heights[i]) {
-                right[stack.pop()] = i;
+                stack.pop();
             }
-          
-            // The remaining top of stack (if exists) is the left boundary for current element
+            // If stack is empty, no smaller element to the left. Otherwise, top is the answer.
+
             left[i] = stack.isEmpty() ? -1 : stack.peek();
-          
-            // Push current index to stack
+
+            stack.push(i);
+
+        }
+
+        // Clear the stack for the next pass
+        stack.clear();
+
+
+
+// pass two -> right 
+
+        for (int i = n - 1; i >= 0; i--) {
+
+            // Pop elements from stack while stack is not empty and the top is >= current element
+
+            while (!stack.isEmpty() && heights[stack.peek()] >= heights[i]) {
+                stack.pop();
+            }
+            // If stack is empty, no smaller element to the right. Otherwise, top is the answer
+            
+            right[i] = stack.isEmpty() ? n : stack.peek();
+        
             stack.push(i);
         }
-      
-        // Calculate the maximum rectangle area for each bar as the minimum height
+
+
+        int maxArea = 0;
         for (int i = 0; i < n; i++) {
-            // Width of rectangle with heights[i] as the minimum height
+          
+
+
             int width = right[i] - left[i] - 1;
             int area = heights[i] * width;
             maxArea = Math.max(maxArea, area);
         }
-      
+
         return maxArea;
     }
-}
-
-
-
-
-
-  
 }
